@@ -1,5 +1,7 @@
 # Better Dictation for Mac
 
+![Better Dictation Screenshot](better-dictation.png)
+
 A replacement for macOS's built-in dictation feature that provides more accurate transcription using OpenAI's Whisper speech-to-text model.  This is the same model that is used by OpenAI to transcribe voice inputs in the ChatGPT app.
 
 ## Prerequisites
@@ -14,7 +16,7 @@ Before using this tool, you must have [whisper.cpp](https://github.com/ggerganov
 
 ## Usage
 
-1. Press Command + Option + K to start dictation
+1. While you're in any app on your macbook (e.g. Chrome, TextEdit), press Command + Option + K to start dictation
 2. Speak into your microphone, and then press Command + Option + K again
 3. The transcribed text will be automatically typed where your cursor is located
 
@@ -41,4 +43,7 @@ This tool records audio when activated, processes it through whisper.cpp for tra
    ```bash
    python better_dictation.py
    ```
+
+4. Keep the terminal window with the script running in the background. You can now switch to any other application window and use Command + Option + K to activate speech-to-text transcription while the script continues running.
+
 
