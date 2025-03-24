@@ -1,0 +1,29 @@
+# Better Dictation for Mac
+
+A replacement for macOS's built-in dictation feature that provides more accurate transcription using Whisper.cpp.
+
+## Prerequisites
+
+Before using this tool, you must have [whisper.cpp](https://github.com/ggerganov/whisper.cpp) installed on your Mac. Follow the installation instructions in their repository.
+
+## Features
+
+- More accurate speech-to-text transcription compared to macOS's default dictation
+- Uses the high-quality Whisper speech recognition model from OpenAI
+- Seamlessly integrates with your Mac's keyboard shortcuts
+
+## Usage
+
+1. Press Command + Option + K to start dictation
+2. Speak into your microphone, and then press Command + Option + K again
+3. The transcribed text will be automatically typed where your cursor is located
+
+## How it Works
+
+This tool records audio when activated, processes it through whisper.cpp for transcription, and then types out the result as if it were typed from your keyboard. It provides a more accurate alternative to the built-in macOS dictation feature.
+
+## Installation
+
+1. Clone this repository
+2. Install the required Python dependencies:
+
