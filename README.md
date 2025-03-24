@@ -1,6 +1,6 @@
 # Better Dictation for Mac
 
-A replacement for macOS's built-in dictation feature that provides more accurate transcription using Whisper.cpp.
+A replacement for macOS's built-in dictation feature that provides more accurate transcription using OpenAI's Whisper speech-to-text model.  This is the same model that is used by OpenAI to transcribe voice inputs in the ChatGPT app.
 
 ## Prerequisites
 
