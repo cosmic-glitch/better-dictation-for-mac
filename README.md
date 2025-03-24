@@ -24,6 +24,21 @@ This tool records audio when activated, processes it through whisper.cpp for tra
 
 ## Installation
 
-1. Clone this repository
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/yourusername/better-dictation-mac.git
+   cd better-dictation-mac
+   ```
+
 2. Install the required Python dependencies:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+   ```
+
+3. Run the script:
+   ```bash
+   python better_dictation.py
+   ```
 
