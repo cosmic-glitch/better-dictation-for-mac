@@ -5,6 +5,14 @@ import os
 import pyautogui
 import wavio
 import time
+import openai
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+
+# Configure OpenAI API
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
 is_recording = False
 audio_data = []
@@ -41,19 +49,30 @@ def handle_recording():
     wavio.write(filename, np.array(audio_data), 16000, sampwidth=2)
 
     audio_data = []
-    # Change this to the path of the whisper.cpp executable
-    result = os.system("../whisper.cpp/build/bin/whisper-cli -m ../whisper.cpp/models/ggml-small.en.bin -f recording.wav --output-txt 2> /dev/null > /dev/null")
-    if result == 0 and recording_duration < MAX_RECORDING_TIME:
-        with open('recording.wav.txt', 'r') as file:
-            text = file.read().strip().replace('\n', '')
-            text = text.replace("[BLANK_AUDIO]", "")  # Remove [BLANK_AUDIO] if present
+    
+    if recording_duration >= MAX_RECORDING_TIME:
+        print("Recording exceeded maximum duration. No text will be typed.")
+        return
+
+    try:
+        # Open the audio file
+        with open(filename, "rb") as audio_file:
+            # Call OpenAI's Whisper API
+            transcript = openai.Audio.transcribe(
+                model="whisper-1",
+                file=audio_file,
+                language="en"
+            )
+            
+            # Get the transcribed text
+            text = transcript["text"].strip()
             print(text)
             pyautogui.typewrite(text)
-    elif recording_duration >= MAX_RECORDING_TIME:
-        print("Recording exceeded maximum duration. No text will be typed.")
-    else:
-        print("Failed to transcribe audio", result)
+            
+    except Exception as e:
+        print(f"Failed to transcribe audio: {str(e)}")
 
+    # Clean up the temporary file
     # os.system("rm recording.wav")
 
 def callback(indata, frames, time_info, status):
