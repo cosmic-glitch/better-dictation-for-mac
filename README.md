@@ -30,8 +30,8 @@ This tool records audio when activated, sends it to OpenAI's Whisper API for tra
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/better-dictation-mac.git
-   cd better-dictation-mac
+   git clone https://github.com/<yourusername>/better-dictation-for-mac.git
+   cd better-dictation-for-mac
    ```
 
 2. Install the required Python dependencies:
@@ -43,7 +43,7 @@ This tool records audio when activated, sends it to OpenAI's Whisper API for tra
 
 3. Create a `.env` file in the project root and add your OpenAI API key:
    ```
-   OPENAI_API_KEY=your-api-key-here
+   OPENAI_API_KEY="your-api-key-here"
    ```
 
 4. Run the script:
@@ -65,5 +65,3 @@ The following Python packages are required:
 - python-dotenv
 
 These will be automatically installed when you run `pip install -r requirements.txt`.
-
-
