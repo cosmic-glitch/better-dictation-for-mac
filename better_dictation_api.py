@@ -18,26 +18,34 @@ is_recording = False
 audio_data = []
 start_time = 0
 MAX_RECORDING_TIME = 100  # Maximum recording time in seconds
+DOUBLE_TAP_THRESHOLD = 0.4  # seconds
+last_right_option_press = 0
 
 def on_press(key):
-    global is_recording, audio_data, start_time
+    global is_recording, audio_data, start_time, last_right_option_press
     try:
-        # Check if the key combination is Command + Option + K
-        if hasattr(key, 'char') and key.char == '˚':
-            if not is_recording:
-                print("Started recording...")
-                is_recording = True
-                audio_data = []
-                start_time = time.time()
-                play_buzz()
-                stream.start()
+        # Check for double-tap of Right Option key
+        if key == keyboard.Key.alt_r:
+            current_time = time.time()
+            if current_time - last_right_option_press < DOUBLE_TAP_THRESHOLD:
+                # Double-tap detected
+                if not is_recording:
+                    print("Started recording...")
+                    is_recording = True
+                    audio_data = []
+                    start_time = current_time
+                    play_buzz()
+                    stream.start()
+                else:
+                    # Stop recording
+                    print("Stopped recording...")
+                    is_recording = False
+                    stream.stop()
+                    handle_recording()
+                    play_buzz()
+                last_right_option_press = 0  # Reset to prevent triple-tap
             else:
-                # Stop recording
-                print("Stopped recording...")
-                is_recording = False
-                stream.stop()
-                handle_recording()
-                play_buzz()
+                last_right_option_press = current_time
     except AttributeError:
         pass
 
